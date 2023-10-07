@@ -1,0 +1,23 @@
+package main
+import (
+	"fmt"
+	"time"
+)
+func Logger(f func() int) func() int {
+	return func() int {
+		startTime := time.Now()
+		result := f()
+		endTime := time.Now()
+		fmt.Printf("Function took %v to execute\n", endTime.Sub(startTime))
+		return result
+	}
+}
+func ExampleFunction() int {
+	time.Sleep(2 * time.Second)
+	return 42
+}
+func main() {
+	decoratedFunc := Logger(ExampleFunction)
+	result := decoratedFunc()
+	fmt.Println("Result:", result)
+}
