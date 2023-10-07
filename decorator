@@ -12,12 +12,3 @@ func Logger(f func() int) func() int {
 		return result
 	}
 }
-func ExampleFunction() int {
-	time.Sleep(2 * time.Second)
-	return 42
-}
-func main() {
-	decoratedFunc := Logger(ExampleFunction)
-	result := decoratedFunc()
-	fmt.Println("Result:", result)
-}
